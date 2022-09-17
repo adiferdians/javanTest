@@ -20,7 +20,7 @@
     {{-- Axios --}}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <title>Document</title>
+    <title>Crud</title>
 
 </head>
 <body style="padding-left: 200px; padding-top: 100px; padding-right: 300px; font-size: 18px">

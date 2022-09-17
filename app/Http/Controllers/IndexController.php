@@ -42,13 +42,11 @@ class IndexController extends Controller
             $data->parrentId = $request->parrentId;
             $data->save();
          } else {
-             for ($i=0; $i < 4; $i++) { 
-                 $data = new Silsilah();
-                 $data->nama = $request->nama;
-                 $data->jk = $request->jk;
-                 $data->parrentId = $request->parrentId;
-                 $data->save();
-             }
+            $data = new Silsilah();
+            $data->nama = $request->nama;
+            $data->jk = $request->jk;
+            $data->parrentId = $request->parrentId;
+            $data->save();
         }
 
         return back();

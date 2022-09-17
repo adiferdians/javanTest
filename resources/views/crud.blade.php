@@ -23,14 +23,14 @@
     <title>Document</title>
 
 </head>
-<body style="padding-left: 30px; padding-top: 100px">
+<body style="padding-left: 200px; padding-top: 100px; padding-right: 300px; font-size: 18px">
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form action="/send" method="POST">
+                <form action="/api/send" method="POST">
                     @csrf
                     <input type="text" name="id" id="id" hidden>
                     <div>
@@ -61,7 +61,7 @@
             <th>Nama</th>
             <th>Jenis Kelamin</th>
             <th>ParrentId</th>
-            <th><button class="btn button-primary" id="add">Tambah Data</button></th>
+            <th><button class="btn button-blue" id="add">Tambah Data</button></th>
         </thead><tbody>
             @foreach ($data as $item)
                 <tr>
@@ -84,8 +84,11 @@
 
         $(document).on('click', '#add', function(){
             $('#exampleModalCenter').modal('show');
+            $(".modal-body #id").val('');
+            $(".modal-body #nama").val('');
+            $(".modal-body #jk").val('');
+            $(".modal-body #parrentId").val('');
         })
-
 
         $(document).on('click', '#edit', function(){
             $('#exampleModalCenter').modal('show');
@@ -101,36 +104,44 @@
 
         $(document).on('click', '#del', function(){
             const id = $(this).data('id');
-            
+
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    axios.post('/del', {
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((response) => {
+                if (response.isConfirmed) {
+                    axios.post('/api/del', {
                     id
-                }).then((response) => {
-                    Swal.fire({
-                        title: 'Success...',
-                        text: 'Sukses Menghapus  Data!',
-                        type: 'success',
-                        confirmButtonText: 'Ok',
-                    }).then((result) => {
-                        location.reload();
+                    }).then((response) => {
+                        Swal.fire({
+                            title: 'Success...',
+                            text: 'Sukses Menghapus  Data!',
+                            type: 'success',
+                            confirmButtonText: 'Ok',
+                        }).then((response) => {
+                            location.reload();
+                        })
                     })
-                }).catch((error) => {
-                    Swal.fire({
-                        title: 'Oops...',
-                        text: 'Ada yang salah',
-                        type: 'error',
-                        confirmButtonText: 'Ok'
-                    })
+                } else if ( response.dismiss === Swal.DismissReason.cancel) {
+                    swal.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe!!',
+                    'error'
+                    )
+                }
+            }).catch((error) => {
+                Swal.fire({
+                    title: 'Oops...',
+                    text: 'Ada yang salah',
+                    type: 'error',
+                    confirmButtonText: 'Ok'
                 })
-                })
+            })
         })
     </script>
 </body>

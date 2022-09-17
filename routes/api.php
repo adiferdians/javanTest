@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('/send', [IndexController::class, 'send']);
+Route::post('/del', [IndexController::class, 'del']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -15,6 +15,4 @@ use App\Http\Controllers\IndexController;
 */
 
 Route::get('/', [IndexController::class, 'index']);
-Route::post('/send', [IndexController::class, 'send']);
-Route::post('/del', [IndexController::class, 'del']);
 

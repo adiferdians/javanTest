@@ -46,7 +46,7 @@
                         <input type="text" class="form-control" name="parrentId" id="parrentId">
                     </div>
                     <div style="padding-top: 30px; justify-content: right">
-                        <input class="btn btn-success" type="submit"></input>
+                        <input class="btn btn-success" id="sub" type="submit"></input>
                     </div>
                 </form>
             </div>
@@ -88,6 +88,16 @@
             $(".modal-body #nama").val('');
             $(".modal-body #jk").val('');
             $(".modal-body #parrentId").val('');
+        })
+
+        $(document).on('click', '#sub', function(){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your data has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            })
         })
 
         $(document).on('click', '#edit', function(){

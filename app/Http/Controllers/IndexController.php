@@ -7,24 +7,23 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-
+    // Rancangan API untuk table silsilah
     public function getData(){
         $data = Silsilah::all();
-
-            if($data){
-                $silsilahData = [
-                    'OUT_STAT' => 'T',
-                    'OUT_MESS' => 'Success',
-                    'OUT_DATA' => $data
-                ];
-                return $silsilahData;
-            } else {
-                return response()->json(array(
-                    'OUT_STAT' => 'F',
-                    'OUT_MESS' => 'Failed',
-                    'OUT_DATA' => $data
-                ), 300);
-            }
+        if($data){
+            $silsilahData = [
+                'OUT_STAT' => 'T',
+                'OUT_MESS' => 'Success',
+                'OUT_DATA' => $data
+            ];
+            return $silsilahData;
+        } else {
+            return response()->json(array(
+                'OUT_STAT' => 'F',
+                'OUT_MESS' => 'Failed',
+                'OUT_DATA' => $data
+            ), 300);
+        }
     }
 
     public function index(Request $request){
@@ -48,16 +47,13 @@ class IndexController extends Controller
             $data->parrentId = $request->parrentId;
             $data->save();
         }
-
         return back();
     }
 
     public function del(Request $request){
         $id = $request->id;
-
         $data =Silsilah::find($id);
         $data->delete();
-
         return back();
     }
 }
